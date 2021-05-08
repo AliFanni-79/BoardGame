@@ -32,8 +32,9 @@ public class starPage extends JFrame{
                     int intColumn = Integer.parseInt(column.getText());
 
                     if (intColumn <= Main.tableSize[0] && intRow <= Main.tableSize[1])
-                        if (Main.isReserved[intColumn][intRow]) {
+                        if (!Main.isReserved[intColumn - 1][intRow - 1]) {
                             ancestorMenu.addToResult("star," + intColumn + "," + intRow);
+                            Main.isReserved[intColumn - 1][intRow - 1] = true;
                             dispose();
                         } else new JOptionPane("این خانه قبلا استفاده شده",
                                 JOptionPane.ERROR_MESSAGE).createDialog("اخطار").setVisible(true);

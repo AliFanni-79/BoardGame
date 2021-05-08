@@ -54,7 +54,7 @@ public class BoardBuilder {
                         input = jumpToNext(input);
                         int row = Integer.parseInt(word(input)) - 1;
                         input = jumpToNext(input);
-                        int amount = Integer.parseInt(word(input)) - 1;
+                        int amount = Integer.parseInt(word(input));
                         input = jumpToNext(input);
                         SpeedLimit limit = new SpeedLimit(c, row, column, amount);
                         Entities.entities.add(limit);
@@ -78,8 +78,31 @@ public class BoardBuilder {
                 }
             }
         } else if (input.equals("rand")) randomEntities(c);
+        checkStarCount(c);
     }
 
+    @SuppressWarnings("DuplicatedCode")
+    private static void checkStarCount(Container c) {
+        if (Star.count < 5) {
+            Random random = new Random();
+            while (Star.count < 5) {
+                int column, row;
+                do {
+                    column = random.nextInt(Main.tableSize[0]);
+                    row = random.nextInt(Main.tableSize[1]);
+                } while (Main.isReserved[column][row]);
+
+                Star temp = new Star(c, row, column);
+                Star.count++;
+                Entities.entities.add(temp);
+                int[] position = Sluts.getSlutPosition(column, row);
+                temp.setBounds(position[0] + 1, position[1] + 1, 28, 28);
+                Main.isReserved[column][row] = true;
+            }
+        }
+    }
+
+    @SuppressWarnings("DuplicatedCode")
     private static void randomEntities(Container c) {
         Random random = new Random();
 

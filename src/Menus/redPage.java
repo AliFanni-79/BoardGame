@@ -29,15 +29,17 @@ public class redPage extends JFrame{
             else
             {
                 if (row.getText().matches("^\\d+$") && column.getText().matches("^\\d+$")) {
-                    int intRow = Integer.parseInt(row.getText());
-                    int intColumn = Integer.parseInt(column.getText());
+                    int intRow = Integer.parseInt(row.getText()) - 1;
+                    int intColumn = Integer.parseInt(column.getText()) - 1;
 
                     if (intColumn <= Main.tableSize[0] && intRow <= Main.tableSize[1])
                         if (!Arrays.equals(Main.redSlut, new int[]{intColumn, intRow})) {
-                            if (Main.isReserved[intColumn][intRow]) {
+                            if (!Main.isReserved[intColumn][intRow]) {
                                 if (!Arrays.equals(Main.redSlut, new int[]{-1, -1}))
                                     Main.isReserved[Main.redSlut[0]][Main.redSlut[1]] = false;
+
                                 Main.redSlut = new int[]{intColumn, intRow};
+                                Main.isReserved[intColumn][intRow] = true;
                                 dispose();
                             } else new JOptionPane("این خانه قبلا استفاده شده",
                                     JOptionPane.ERROR_MESSAGE).createDialog("اخطار").setVisible(true);

@@ -32,8 +32,9 @@ public class wallPage extends JFrame{
                     int intColumn = Integer.parseInt(column.getText());
 
                     if (intColumn <= Main.tableSize[0] && intRow <= Main.tableSize[1])
-                        if (Main.isReserved[intColumn][intRow]) {
+                        if (!Main.isReserved[intColumn - 1][intRow - 1]) {
                             ancestorMenu.addToResult("wall," + intColumn + "," + intRow);
+                            Main.isReserved[intColumn - 1][intRow - 1] = true;
                             dispose();
                         } else new JOptionPane("این خانه قبلا استفاده شده",
                                 JOptionPane.ERROR_MESSAGE).createDialog("اخطار").setVisible(true);
@@ -41,8 +42,6 @@ public class wallPage extends JFrame{
                             JOptionPane.ERROR_MESSAGE).createDialog("اخطار").setVisible(true);
                 } else new JOptionPane( "در سطر و ستون از اعداد استفاده کنید",
                         JOptionPane.ERROR_MESSAGE).createDialog("اخطار").setVisible(true);
-                ancestorMenu.addToResult("wall," + row.getText() + "," + column.getText());
-
             }
         });
     }

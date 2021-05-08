@@ -32,8 +32,9 @@ public class limitPage extends JFrame{
                     int intColumn = Integer.parseInt(column.getText());
 
                     if (intColumn <= Main.tableSize[0] && intRow <= Main.tableSize[1])
-                        if (Main.isReserved[intColumn][intRow]) {
+                        if (!Main.isReserved[intColumn - 1][intRow - 1]) {
                             ancestorMenu.addToResult("limit," + intColumn + "," + intRow + "," + amount.getText());
+                            Main.isReserved[intColumn - 1][intRow - 1] = true;
                             dispose();
                         } else new JOptionPane("این خانه قبلا استفاده شده",
                             JOptionPane.ERROR_MESSAGE).createDialog("اخطار").setVisible(true);

@@ -26,6 +26,6 @@ public class SpeedLimit extends Entities {
 
     public void setLimit() {
         Random random = new Random();
-        limit = random.nextInt(Main.maximumLimit);
+        limit = random.nextInt(Main.maximumLimit - 1) + 1;
     }
 }
